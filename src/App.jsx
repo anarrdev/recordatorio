@@ -2,6 +2,13 @@ import { useState } from 'react'
 
 
 function App() {
+  const [task, setTask] = useState(null)
+
+  const actTask =(key, value)=>{
+    setTask({
+      ...task, [key]: value
+    })
+  }
 
   return (
     <div className='text-center'>
@@ -47,10 +54,16 @@ function App() {
         <h3>Nuevo Recordatorio</h3>
 
         <div className='d-flex justify-content-center gap-2'>
-        <input type="text" className='form-control' placeholder='Escribe un recordatorio nuevo...'/>
-        <button className='btn btn-outline-dark'>Agregar</button>
+          <input type="text" className='form-control' placeholder='Escribe un recordatorio nuevo...' />
+          <button className='btn btn-outline-dark'>Agregar</button>
         </div>
+      </div>
+      <hr />
 
+
+      {/* SECCION: LISTA DE RECORDATORIOS */}
+      <div>
+        <h3>Lista de Recordatorios</h3>
       </div>
 
     </div>
