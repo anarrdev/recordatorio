@@ -6,24 +6,51 @@ function App() {
   return (
     <div className='text-center'>
 
-      {/* NAVBAR */}
-      <nav className="navbar bg-dark p-2" data-bs-theme="dark">
+
+      {/* SECCION: NAVBAR */}
+      <nav className="navbar navbar-expand-sm bg-dark p-2" data-bs-theme="dark">
 
         <a className="navbar-brand d-flex align-items-center" href="#">
           <i className="bi bi-pencil-square me-2"></i>
-          <span className='fs-2'>Mis Recordatorios</span>
+          <span className='fs-1'>Mis Recordatorios</span>
         </a>
-        <div className="d-flex ms-auto gap-2">
-          <button className='btn btn-outline-light border border-light'>Urgentes</button>
-          <button className='btn btn-outline-light border border-light'>Completados</button>
+
+
+        {/* Boton de 'hamburguesa' */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarButtons"
+          aria-controls="navbarButtons"
+          aria-expanded="false"
+          aria-label="Mostrar navegación">
+
+          <span className="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div className='collapse navbar-collapse' id='navbarButtons'>
+
+          <div className="d-flex ms-auto gap-2">
+            <button className='btn btn-outline-light'>Urgentes</button>
+            <button className='btn btn-outline-light'>Completados</button>
+          </div>
+
         </div>
       </nav>
 
-      {/* AGREGAR NUEVA TAREA */}
-      <div className='my-2'>
+
+      {/* SECCION: AGREGAR NUEVA TAREA */}
+      <div className='m-4'>
         <h3>Nuevo Recordatorio</h3>
-        <input type="text" />
+
+        <div className='d-flex justify-content-center gap-2'>
+        <input type="text" className='form-control' placeholder='Escribe un recordatorio nuevo...'/>
         <button className='btn btn-outline-dark'>Agregar</button>
+        </div>
+
       </div>
 
     </div>
