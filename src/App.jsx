@@ -13,10 +13,15 @@ function App() {
 
 
   //RECORDATORIOS
-  const [reminder, setReminder] = useState([]) //Estado inicial de la lista de Recordatorios
+  const [reminders, setReminders] = useState([]) //Estado inicial de la lista de Recordatorios
 
   const addTask = () => { //Funcion que agrega la tarea a la lista de recordatorios
-    setReminder([...reminder, task])
+    if(!task || !task.task){
+      alert('No ha escrito ninguna tarea')
+      return
+    }
+    setReminders([...reminders, task])
+    setTask(null)
   }
 
 
@@ -61,7 +66,7 @@ function App() {
 
 
       {/* SECCION: AGREGAR NUEVA TAREA */}
-      <div className='m-4'>
+      <div className='mt-4'>
         <h3>Nuevo Recordatorio</h3>
 
         <div className='d-flex justify-content-center gap-2'>
@@ -69,18 +74,28 @@ function App() {
           <input type="text"
             className='form-control'
             placeholder='Escribe un recordatorio nuevo...'
+            value={task ? task.task : ''}
             onChange={(evt) => actTask('task', evt.target.value)} />
 
-          <button className='btn btn-outline-dark'>Agregar</button>
+          <button className='btn btn-outline-dark' onClick={addTask}>Agregar</button>
         </div>
 
       </div>
-      <hr />
 
 
       {/* SECCION: LISTA DE RECORDATORIOS */}
-      <div>
+        <div className='mt-4'>
+      <div className='form-control'>
         <h3>Lista de Recordatorios</h3>
+        {
+          reminders.map((i, index)=>(
+            <div key={index}>
+              <p className='border bg-light'>{i.task}</p>
+            </div>
+          ))
+        }
+      </div>
+
       </div>
 
     </div>
