@@ -2,13 +2,24 @@ import { useState } from 'react'
 
 
 function App() {
-  const [task, setTask] = useState(null)
+  // TASK
+  const [task, setTask] = useState(null)  // Estado inicial de la tarea
 
-  const actTask =(key, value)=>{
+  const actTask = (key, value) => {// Funcion que actualiza la tarea
     setTask({
       ...task, [key]: value
     })
   }
+
+
+  //RECORDATORIOS
+  const [reminder, setReminder] = useState([]) //Estado inicial de la lista de Recordatorios
+
+  const addTask = () => { //Funcion que agrega la tarea a la lista de recordatorios
+    setReminder([...reminder, task])
+  }
+
+
 
   return (
     <div className='text-center'>
@@ -38,8 +49,8 @@ function App() {
         </button>
 
 
+        {/* BOTONES */}
         <div className='collapse navbar-collapse' id='navbarButtons'>
-
           <div className="d-flex ms-auto gap-2">
             <button className='btn btn-outline-light'>Urgentes</button>
             <button className='btn btn-outline-light'>Completados</button>
@@ -54,9 +65,15 @@ function App() {
         <h3>Nuevo Recordatorio</h3>
 
         <div className='d-flex justify-content-center gap-2'>
-          <input type="text" className='form-control' placeholder='Escribe un recordatorio nuevo...' />
+
+          <input type="text"
+            className='form-control'
+            placeholder='Escribe un recordatorio nuevo...'
+            onChange={(evt) => actTask('task', evt.target.value)} />
+
           <button className='btn btn-outline-dark'>Agregar</button>
         </div>
+
       </div>
       <hr />
 
