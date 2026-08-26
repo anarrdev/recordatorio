@@ -16,15 +16,34 @@ function App() {
   const [reminders, setReminders] = useState([]) //Estado inicial de la lista de Recordatorios
 
   const addTask = () => { //Funcion que agrega la tarea a la lista de recordatorios
-    if(!task || !task.task){
+    if (!task || !task.task) {
       alert('No ha escrito ninguna tarea')
       return
     }
-    setReminders([...reminders, task])
+
+    // Agregamos la condicion de si está completa o no la tarea
+    const newTask = {
+      ...task,
+      completed: false
+    }
+
+    setReminders([...reminders, newTask])
     setTask(null)
   }
 
 
+
+  // ToggleTask
+  const toggleTask = (index) => {
+    const newReminders = reminders.map((tarea, posicion) => {
+      if (posicion === index) {
+        return {
+          ...tarea, completed: !tarea.completed
+        }
+      } return tarea
+    })
+    setReminders(newReminders)
+  }
 
   return (
     <div className='text-center'>
@@ -66,7 +85,7 @@ function App() {
 
 
       {/* SECCION: AGREGAR NUEVA TAREA */}
-      <div className='mt-4'>
+      <div className='m-4'>
         <h3>Nuevo Recordatorio</h3>
 
         <div className='d-flex justify-content-center gap-2'>
@@ -80,24 +99,29 @@ function App() {
           <button className='btn btn-outline-dark' onClick={addTask}>Agregar</button>
         </div>
 
-      </div>
 
 
-      {/* SECCION: LISTA DE RECORDATORIOS */}
+        {/* SECCION: LISTA DE RECORDATORIOS */}
         <div className='mt-4'>
-      <div className='form-control'>
-        <h3>Lista de Recordatorios</h3>
-        {
-          reminders.map((i, index)=>(
-            <div key={index}>
-              <p className='border bg-light'>{i.task}</p>
-            </div>
-          ))
-        }
-      </div>
+          <div className='form-control'>
+            <h3>Lista de Recordatorios</h3>
+            {
+              reminders.map((i, index) => (
+                <div key={index} className='d-flex justify-content-between align-items-center border bg-light p-1'>
+                  <p className='mb-0'>{i.task}</p>
+                  <button
+                    className={i.completed ? 'btn btn-success' : 'btn btn-info'}
+                    onClick={() => toggleTask(index)}>
+                    {i.completed ? 'Completada' : 'Pendiente'}
+                  </button>
+                </div>
+              ))
+            }
+          </div>
+
+        </div>
 
       </div>
-
     </div>
   )
 }
