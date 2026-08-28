@@ -45,6 +45,21 @@ function App() {
     setReminders(newReminders)
   }
 
+
+  //Eliminar tarea
+  const eraseTask = (index) => {
+
+    if (!reminders[index].completed) {
+      alert('No puede eliminar la tarea si no se ha completado')
+      return
+    } const nuevoReminders = reminders.filter((tarea, posicion) => {
+      return posicion !== index
+    })
+    setReminders(nuevoReminders)
+  }
+
+
+
   return (
     <div className='text-center'>
 
@@ -109,11 +124,18 @@ function App() {
               reminders.map((i, index) => (
                 <div key={index} className='d-flex justify-content-between align-items-center border bg-light p-1'>
                   <p className='mb-0'>{i.task}</p>
-                  <button
-                    className={i.completed ? 'btn btn-success' : 'btn btn-info'}
-                    onClick={() => toggleTask(index)}>
-                    {i.completed ? 'Completada' : 'Pendiente'}
-                  </button>
+
+                  <div className='d-flex gap-2'>
+                    <button
+                      className={i.completed ? 'btn btn-success' : 'btn btn-info'}
+                      onClick={() => toggleTask(index)}>
+                      {i.completed ? 'Completada' : 'Pendiente'}
+                    </button>
+                    <button className='btn btn-danger' onClick={() => eraseTask(index)}>
+                      <i className='bi bi-trash'></i>
+                    </button>
+                  </div>
+
                 </div>
               ))
             }
