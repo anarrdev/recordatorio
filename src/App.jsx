@@ -48,7 +48,6 @@ function App() {
 
   //Eliminar tarea
   const eraseTask = (index) => {
-
     if (!reminders[index].completed) {
       alert('No puede eliminar la tarea si no se ha completado')
       return
